@@ -1,0 +1,4 @@
+  student_id name      course        cohort      graduation_date email_address
+0        ...  xxx         NaN           NaN                  NaN           xxx
+1       1234  xxx  'Software'  '2024-03-31'  'j.smith@email.com'           xxx
+2        ...  xxx         NaN           NaN                  NaN           xxx
