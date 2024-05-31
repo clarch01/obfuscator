@@ -2,6 +2,7 @@ import csv
 import pandas as pd
 import boto3
 from pprint import pprint
+from io import StringIO
 
 from redactor import redactor
 from s3_url_splitter import s3_url_splitter
@@ -20,13 +21,14 @@ def obfuscator(input):
         Bucket=url['bucket'],
         Key=url['key']
     )
-    file_bytestream = response['Body']
+    file_bytestream = StringIO(response['Body'].read().decode('utf-8'))
 
     # pprint(file_bytestream.read())
     
     df = pd.DataFrame(file_bytestream)
-    # df.columns = df.iloc[0]
-    # df = df[1:]
+    df.columns = df.iloc[0]
+    df = df[1:]
+    # dataframe is split into columns correctly for test case
     pprint(df)
 # remove senesitive data
     # data = pd.read_csv(input['file_to_obfuscate'])
