@@ -1,5 +1,6 @@
 import re
 
+
 def s3_url_splitter(url):
     split = re.split(r"//|/", url, maxsplit=2)
     bucket = split[1]

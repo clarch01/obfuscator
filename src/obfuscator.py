@@ -5,13 +5,14 @@ from io import StringIO
 from redactor import redactor
 from s3_url_splitter import s3_url_splitter
 
+
 def obfuscator(input):
     client = boto3.client('s3')
 
 # split input 'file_to_obfuscate' into bucket and key values
     bucket_key = s3_url_splitter(input['file_to_obfuscate'])
 
-# get the object from bucket 
+# get the object from bucket
     response = client.get_object(
         Bucket=bucket_key['bucket'],
         Key=bucket_key['key']
@@ -24,8 +25,6 @@ def obfuscator(input):
     df = redactor(df, input['pii_fields'])
 
     return bytes(pd.DataFrame.to_csv(df), encoding='utf-8')
-
-
 
 
 # test_input = {
